@@ -9,7 +9,11 @@ import { TodosLosPostComponent } from './todos-los-post/todos-los-post.component
 import { SiguiendoComponent } from './siguiendo/siguiendo.component';
 import { FavoritosComponent } from './favoritos/favoritos.component';
 import { MisPostsComponent } from './mis-posts/mis-posts.component';
-
+import { IniciarSesionComponent } from './iniciar-sesion/iniciar-sesion.component';
+import { RegistrarseComponent } from './registrarse/registrarse.component';
+import { RouteGuard } from './route-guard';
+import { FormsModule } from '@angular/forms';
+ 
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,13 +22,16 @@ import { MisPostsComponent } from './mis-posts/mis-posts.component';
     TodosLosPostComponent,
     SiguiendoComponent,
     FavoritosComponent,
-    MisPostsComponent
+    MisPostsComponent,
+    IniciarSesionComponent,
+    RegistrarseComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
-  providers: [],
+  providers: [RouteGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

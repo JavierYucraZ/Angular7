@@ -9,18 +9,18 @@
 
           <a class="nav-link" routerLink="/Inicio">Inicio</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="isLoggedIn">
           <a class="nav-link" routerLink="/TodosLosPosts">Todos Los Posts</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="isLoggedIn">
 
           <a class="nav-link" routerLink="/Siguiendo">Siguiendo</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="isLoggedIn">
 
           <a class="nav-link" routerLink="/Favoritos">Favoritos</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="isLoggedIn">
 
           <a class="nav-link" routerLink="/MisPost">Mis Post</a>
         </li>
@@ -28,9 +28,17 @@
 
       <ul class="nav navbar-nav navbar-right">
 		
-      	<li class="nav-item"><a class="nav-link" href="">Iniciar Sesion</a></li>
-      	<li class="nav-item"><a class="nav-link" href="">Registrarse</a></li>
-      	<li class="nav-item"><a class="nav-link" href="">Cerrar Sesion</a></li>
+      	<li class="nav-item">
+      		<a class="nav-link" routerLink="/IniciarSesion">
+      		Iniciar Sesion</a>
+      	</li>
+      	<li class="nav-item">
+      		<a class="nav-link" routerLink="/Registrarse">
+      		Registrarse</a>
+      	</li>
+      	<li class="nav-item" *ngIf="isLoggedIn">
+      		<a class="nav-link" routerLink="">
+      		Cerrar Sesion</a></li>
 
      </ul>
     </div>
