@@ -1,45 +1,38 @@
-<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-    <span class="navbar-brand">Nuevo Proyecto</span>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <span class="navbar-brand">Proyecto Angular</span>
     <div class="collapse navbar-collapse" id="navbarCollapse">
-      <ul class="navbar-nav mr-auto">
+        <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-
-          <a class="nav-link" routerLink="/Inicio">Inicio</a>
+            <a class="nav-link" routerLink="/Inicio">Inicio</a>
         </li>
-        <li class="nav-item" *ngIf="isLoggedIn">
-          <a class="nav-link" routerLink="/TodosLosPosts">Todos Los Posts</a>
+        <li class="nav-item">
+            <a class="nav-link" routerLink="/TodosLosPosts" *ngIf="isLoggedIn">Todos los Posts</a>
         </li>
-        <li class="nav-item" *ngIf="isLoggedIn">
-
-          <a class="nav-link" routerLink="/Siguiendo">Siguiendo</a>
+        <li class="nav-item">
+            <a class="nav-link" routerLink="/Siguiendo" *ngIf="isLoggedIn">Siguiendo</a>
         </li>
-        <li class="nav-item" *ngIf="isLoggedIn">
-
-          <a class="nav-link" routerLink="/Favoritos">Favoritos</a>
+        <li class="nav-item">
+            <a class="nav-link" routerLink="/Favoritos" *ngIf="isLoggedIn">Favoritos</a>
         </li>
-        <li class="nav-item" *ngIf="isLoggedIn">
-
-          <a class="nav-link" routerLink="/MisPost">Mis Post</a>
+        <li class="nav-item">
+            <a class="nav-link" routerLink="/MisPost" *ngIf="isLoggedIn">Mis Posts</a>
         </li>
-      </ul>
+        </ul>
 
-      <ul class="nav navbar-nav navbar-right">
-		
-      	<li class="nav-item">
-      		<a class="nav-link" routerLink="/IniciarSesion">
-      		Iniciar Sesion</a>
-      	</li>
-      	<li class="nav-item">
-      		<a class="nav-link" routerLink="/Registrarse">
-      		Registrarse</a>
-      	</li>
-      	<li class="nav-item" *ngIf="isLoggedIn">
-      		<a class="nav-link" routerLink="">
-      		Cerrar Sesion</a></li>
-
-     </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li *ngIf="isLoggedIn" style="color: white;">
+                {{ email }}
+            </li>
+          <li class="nav-item" *ngIf="!isLoggedIn">
+                <a class="nav-link" routerLink="/Registrarse">Registrarse</a>
+            </li>
+          <li class="nav-item" *ngIf="!isLoggedIn">
+                <a class="nav-link" routerLink="/IniciarSesion">Iniciar Sesion</a>
+            </li>
+          <li class="nav-item" *ngIf="isLoggedIn" (click)="onLogout()">
+                <a class="nav-link" routerLink="/Inicio">Salir</a>
+            </li>
+        </ul>
     </div>
-  </nav>
+</nav>
+<br>

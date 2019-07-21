@@ -1,9 +1,13 @@
 import { CanActivate } from '@angular/router';
+import * as firebase from 'firebase/app';
 
 export class RouteGuard implements CanActivate{
 
 	canActivate(){
-		//Si el usuario esta logeado, devuelve un true, caso contrario devuelve falso
-		return false;
+		if (firebase.auth().currentUser) {
+			return true;
+		}else{
+			return false;
+		}
 	}	
 }

@@ -13,7 +13,11 @@ import { IniciarSesionComponent } from './iniciar-sesion/iniciar-sesion.componen
 import { RegistrarseComponent } from './registrarse/registrarse.component';
 import { RouteGuard } from './route-guard';
 import { FormsModule } from '@angular/forms';
- 
+import { NotificationComponent } from './notification/notification.component';
+import { NotificationService } from './servicios/notification.service';
+import { UserService } from './servicios/user.service';
+import { MyFireService } from './servicios/myfire.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,14 +28,15 @@ import { FormsModule } from '@angular/forms';
     FavoritosComponent,
     MisPostsComponent,
     IniciarSesionComponent,
-    RegistrarseComponent
+    RegistrarseComponent,
+    NotificationComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule
   ],
-  providers: [RouteGuard],
+  providers: [RouteGuard, NotificationService, MyFireService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
