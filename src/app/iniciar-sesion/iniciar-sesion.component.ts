@@ -45,7 +45,7 @@ constructor(private notifier : NotificationService,
       var database = firebase.auth().currentUser;
       if (database) {
         this.userService.set(database);
-        this.router.navigateByUrl('/MisPost');
+        this.router.navigateByUrl('/TodosLosPosts');
       }
     })
     .catch(err =>{

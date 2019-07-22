@@ -1,7 +1,13 @@
+import {UserService} from './user.service';
+import {Injectable } from '@angular/core';
 import * as firebase from 'firebase/app';
 import 'firebase/storage';
 
+
+@Injectable()
 export class MyFireService {
+
+	constructor(private user : UserService) {}
 	
 	getUserFromDatabase(uid){
 		const ref = firebase.database().ref('users/'+uid);
@@ -30,14 +36,44 @@ export class MyFireService {
 		}, error=>{
 			reject(error)
 		}, ()=>{
-			const fileUrl = uploadTask.snapshot.downloadURL;
-			resolve({fileName, fileUrl});
+			const url = "https://firebasestorage.googleapis.com/v0/b/proyectoinstagram-dfd93.appspot.com/o/image%2F"+fileName+"?alt=media&token=bdb267c9-05d2-4776-9531-f3354991bc07";
+			resolve({fileName, url});
 		});
 		});
 		
 	} 
+handleImageUpload(data){
+		const user = this.user.getProfile();
+		const newPersonalPostKey = firebase.database().ref().child('mypost').push().key;
+		const personalPostDetails = {
+			fileUrl : data.url,
+			name : data.fileName,
+			creationDate : new Date().toString()
+		};
+		const allPostKey = firebase.database().ref('allposts').push().key;
+		const allPostDetails = {
+			fileUrl : data.url,
+			name : data.fileName,
+			creationDate : new Date().toString(),
+			uploadedBy : user
+		};
+		const imageDetails={
+			fileUrl : data.url,
+			name : data.fileName,
+			creationDate : new Date().toString(),
+			uploadedBy : user,
+			favoritesCount : 0
+		};
+		const updates = {};
+		updates['/myposts/' + user.uid + "/" + newPersonalPostKey] = personalPostDetails;
+		updates['/allposts/'+ allPostKey] = allPostDetails;
+		updates['/images/'+data.fileName] = imageDetails;
+		return firebase.database().ref().update(updates);
+	}
 
-	constructor() {}
+	getUserPostsRef(uid){
+		return firebase.database().ref('myposts').child(uid);
+	}
 
 	
 }

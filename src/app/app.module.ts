@@ -17,6 +17,7 @@ import { NotificationComponent } from './notification/notification.component';
 import { NotificationService } from './servicios/notification.service';
 import { UserService } from './servicios/user.service';
 import { MyFireService } from './servicios/myfire.service';
+import { PostComponent } from './post/post.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { MyFireService } from './servicios/myfire.service';
     MisPostsComponent,
     IniciarSesionComponent,
     RegistrarseComponent,
-    NotificationComponent
+    NotificationComponent,
+    PostComponent
   ],
   imports: [
     BrowserModule,
