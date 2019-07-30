@@ -8,7 +8,7 @@ import { NotificationService } from '../servicios/notification.service';
 })
 export class NotificationComponent implements OnInit {
 
-public type : string;
+  public type : string;
   public message : string;
 
   constructor(private notifier : NotificationService) { 

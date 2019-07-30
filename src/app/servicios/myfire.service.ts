@@ -3,7 +3,6 @@ import {Injectable } from '@angular/core';
 import * as firebase from 'firebase/app';
 import 'firebase/storage';
 
-
 @Injectable()
 export class MyFireService {
 
@@ -30,9 +29,8 @@ export class MyFireService {
 		fileRef.put(file);
 		const uploadTask = fileRef.put(file);
 
-
-		return new Promise((resolve, reject)=>{
-			uploadTask.on('state_changed', snapshot=>{
+		return new Promise((resolve, reject) => {
+			uploadTask.on('state_changed', snapshot => {
 		}, error=>{
 			reject(error)
 		}, ()=>{
@@ -42,7 +40,8 @@ export class MyFireService {
 		});
 		
 	} 
-handleImageUpload(data){
+
+	handleImageUpload(data){
 		const user = this.user.getProfile();
 		const newPersonalPostKey = firebase.database().ref().child('mypost').push().key;
 		const personalPostDetails = {
@@ -57,6 +56,7 @@ handleImageUpload(data){
 			creationDate : new Date().toString(),
 			uploadedBy : user
 		};
+
 		const imageDetails={
 			fileUrl : data.url,
 			name : data.fileName,
@@ -64,6 +64,7 @@ handleImageUpload(data){
 			uploadedBy : user,
 			favoritesCount : 0
 		};
+		
 		const updates = {};
 		updates['/myposts/' + user.uid + "/" + newPersonalPostKey] = personalPostDetails;
 		updates['/allposts/'+ allPostKey] = allPostDetails;
@@ -74,6 +75,23 @@ handleImageUpload(data){
 	getUserPostsRef(uid){
 		return firebase.database().ref('myposts').child(uid);
 	}
+
+	handleFavoriteClicked(imageData){
+		const uid = firebase.auth().currentUser.uid;
+		const updates ={};
+		updates['/images/' + imageData.name + '/oldFavoritesCount'] = imageData.favoritesCount;
+		updates['/images/' + imageData.name + '/favoritesCount'] = imageData.favoritesCount+1;
+		updates['/favorites/' + uid + "/" + imageData.name] = imageData;
+		return firebase.database().ref().update(updates);
+	}
+
+	followUser(uploadedByUser){
+		const uid = firebase.auth().currentUser.uid;
+		const updates = {};
+		updates['/follow/'+uid+"/"+uploadedByUser.uid]= true;
+		return firebase.database().ref().update(updates);
+	}
+
 
 	
 }

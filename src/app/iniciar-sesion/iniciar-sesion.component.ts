@@ -31,7 +31,6 @@ constructor(private notifier : NotificationService,
     const email = form.value.email;
     const password = form.value.password;
 
-
     firebase.auth().signInWithEmailAndPassword(email, password).
     then(userData=>{
       if (userData.user.emailVerified) {

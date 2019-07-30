@@ -7,16 +7,14 @@
           <input type="file" (change)="onFileSelection($event)" placeholder="Upload a file" 
           accept=".png, .jpeg, .jpg">
         </div>
-
       </div>
-
     </div>
 
   <div class="row">
     <div class="col md-12">
       <div class="image-container">
-        <app-compartir *ngFor="let post of postLists" [imageName]="post.data.name"
-        [displayPostedBy]="true"></app-compartir>
+        <app-post *ngFor="let post of postLists" [imageName]="post.data.name"
+        [displayPostedBy]="true"></app-post>
       </div>
     </div>
   </div>

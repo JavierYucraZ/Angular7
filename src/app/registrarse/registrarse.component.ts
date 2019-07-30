@@ -27,11 +27,12 @@ export class RegistrarseComponent implements OnInit {
   	const password = form.value.password;
 
   	firebase.auth().createUserWithEmailAndPassword(email,password).
-  	then(userData=>{
+  	then(userData => {
   		userData.user.sendEmailVerification();
   		const message = 'Un correo se envio a '+email+', revisa tu inbox y sigue los pasos de verificacion. Una vez verificado, inicia sesion en la pagina';
   		this.notifier.display('success', message);
-  		return firebase.database().ref('users/' + userData.user.uid).set({
+  		
+      return firebase.database().ref('users/' + userData.user.uid).set({
   			displayname : displayname,
   			email : email,
   			uid : userData.user.uid,
